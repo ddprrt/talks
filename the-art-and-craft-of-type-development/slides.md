@@ -68,6 +68,31 @@ TypeScript came in 3 waves...
 
 ---
 
+## Formalize JavaScript
+
+We need
+- Structural Typing
+- Bendable Type System
+- Dynamic Static Typing
+- Low Maintenance Types
+
+
+---
+
+## Let's code!
+
+---
+
+## Resources
+
+- Book: [TypeScript in 50 Lessons](https://typescript-book.com)
+- Article: [Low maintenance types](https://fettblog.eu/low-maintenance-types-typescript/)
+- Article: [Dynamic static typing](https://smashingmagazine.com/2021/01/dynamic-static-typing-typescript/)
+- Series: [Tidy TypeScript](https://fettblog.eu/archive/tidy-typescript/)
+- Guide: [Advanced TypeScript](https://fettblog.eu/advanced-typescript-guide/)
+
+---
+
 _fin_
 
 @ddprrt
