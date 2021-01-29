@@ -81,6 +81,48 @@ We need
 
 ## Let's code!
 
+### Example 1: Dynamic Static Typing
+
+```typescript
+app.get("/api/user/:userID", (req, res) => {
+  if(req.method === "POST") {
+    res.status(200).send();
+  }
+});
+```
+---
+
+## More code!
+
+### Example 2: Low Maintenance Types
+
+```typescript
+type Toy = BoardGame | Puzzle | Doll;
+
+type ToyKind = "boardgame" | "puzzle" | "doll";
+
+type GroupedToys = {
+  boardgame: Toy[];
+  puzzle: Toy[];
+  doll: Toy[];
+};
+```
+
+---
+
+## A little bit more
+
+### Example 3: No Maintenance Types
+
+```typescript
+const defaultOptions = {
+  from: "./src",
+  to: "./dest",
+};
+
+function copy(options) { /* ... */ }
+```
+
 ---
 
 ## Resources
