@@ -1,70 +1,63 @@
 //#region APP
 const app = {
-  get,
+  get, post, all
 };
 //#endregion
 
 // The Function we want to type
-function get(path, callback) {
+function get<P extends string>(path: P, callback: CallbackFn<"GET", ParseRouteParams<P>>) {
   // tbd
 }
 
-app.get("/api/user/:userID", (req, res) => {
-  if (req.method === 30) {
-    res.status("20").send(`Hello ${req.params.userId}`);
-  }
-});
-
-app.get("/api/user/:userID", (req, res) => {
-  if (req.method === "POS") {
-    res.status(20).send(`Hello ${req.params.userId}`);
-  }
-});
-
-app.get("/api/user/:userID", (req, res) => {
-  if (req.method === "POST") {
-    res.status(200).send(`Hello ${req.params.userId}`);
-  }
-});
-
-/**
- * 1. Basic Types
- * 2. Sub type!
- * 3. Generic Methods
- * 4. Generic params
- * 5. Extract generic params
- */
-
-//#region Basic Types
-/*
-type ServerReply = {
-  send: (obj?: any) => void;
-  status: (statusCode: number) => ServerReply;
-};
-
-type ServerRequest = {
-  method: string;
-  params: Record<string, string>;
-};
-
-type CallbackFn = (
-  req: ServerRequest,
-  reply: ServerReply
-) => void;
-
-*/
-//#endregion
-
-//#region Methods
-// type Methods = "GET" | "POST" | "PUT" | "DELETE";
-
-//#endregion
-
-//#region Idenity
-function identity<T>(inp: T): T {
-  return inp;
+function post<P extends string>(path: P, callback: CallbackFn<"POST", ParseRouteParams<P>>) {
+  // tbd
 }
-//#endregion
+
+function all<P extends string>(path: P, callback: CallbackFn<Methods, ParseRouteParams<P>>) {
+  // tbd
+}
+
+type CallbackFn<M extends Methods, P extends string> = (req: ServerRequest<M, P>, res: ServerReply) => void
+
+type Methods = "GET" | "POST" | "PUT" | "DELETE" | "OPTIONS" | "HEADER";
+
+type ServerRequest<M extends Methods = Methods, P extends string = string> = {
+  method: M,
+  params: Record<P, string>
+}
+
+type ServerReply = {
+  status(statusCode: StatusCode): ServerReply,
+  send(obj?: any): void
+}
+
+type ParseRouteParams<P extends string> = 
+  P extends `/${string}/:${infer Param}/${infer Rest}` ? Param | ParseRouteParams<`/${Rest}`> : 
+  P extends `/${string}/:${infer Param}` ? Param : never
+
+
+app.get("/api/user/:userID/orders/:orderID", (req, res) => {
+  if (req.method === "GET") {
+    res.status(201).send(`Hello ${req.params.userID} as well as ${req.params.orderID}`);
+  }
+});
+
+app.get("/api/user/:userID", (req, res) => {
+  if (req.method === "GET") {
+    res.status(404).send(`Hello ${req.params.userID}`);
+  }
+});
+
+app.post("/api/user/:userID", (req, res) => {
+  if (req.method === "POST") {
+    res.status(200).send(`Hello ${req.params.userID}`);
+  }
+});
+
+app.all("*", function(req, res) {
+  req.method
+})
+
 
 //#region StatusCode
 type StatusCode =
@@ -138,6 +131,45 @@ type StatusCode =
   | 598
   | 599;
 //#endregion
+
+
+
+
+
+
+/**
+ * 1. Basic Types
+ * 2. Sub type!
+ * 3. Generic Methods
+ * 4. Generic params
+ * 5. Extract generic params
+ */
+
+//#region Basic Types
+/*
+type ServerReply = {
+  send: (obj?: any) => void;
+  status: (statusCode: number) => ServerReply;
+};
+
+type ServerRequest = {
+  method: string;
+  params: Record<string, string>;
+};
+
+type CallbackFn = (
+  req: ServerRequest,
+  reply: ServerReply
+) => void;
+
+*/
+//#endregion
+
+//#region Methods
+// type Methods = "GET" | "POST" | "PUT" | "DELETE";
+
+//#endregion
+
 
 //#region Cheatsheet
 /*
