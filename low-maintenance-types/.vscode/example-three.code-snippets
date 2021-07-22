@@ -1,0 +1,13 @@
+{
+  "ex-3-step-1": {
+    "prefix": "ex31",
+    "body": [
+      "",
+      "type PartialOptions = {",
+      "  from?: string;",
+      "  to?: string",
+      "}"
+    ],
+    "description": "ex-3-step-1"
+  }
+}

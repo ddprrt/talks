@@ -1,0 +1,35 @@
+{
+  "ex-2-step-1": {
+    "prefix": "ex21",
+    "body": [
+      "type VideoGame = ToyBase & {",
+      "  kind: \"videogame\";",
+      "  system: \"NES\" | \"SNES\" | \"Mega Drive\" | \"There are no more consoles\";",
+      "};"
+    ],
+    "description": "ex-2-step-1"
+  },
+  "ex-2-step-2": {
+    "prefix": "ex22",
+    "body": [
+      "type ToyKind = Toy[\"kind\"]",
+      "",
+      "type GroupedToys = {",
+      "  [Kind in ToyKind]: Toy[]",
+      "}"
+    ],
+    "description": "ex-2-step-2"
+  },
+  "ex-2-step-3": {
+    "prefix": "ex23",
+    "body": [
+      "type GroupedToys = {",
+      "  [Kind in ToyKind]: GetKind<Toy, Kind>[]",
+      "};",
+      "",
+      "type GetKind<Group, Kind> = Extract<Group, { kind: Kind }>",
+      ""
+    ],
+    "description": "ex-2-step-3"
+  }
+}
